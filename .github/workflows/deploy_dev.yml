@@ -1,0 +1,27 @@
+name: CD – Deploy & Test Dev
+
+on:
+  push:
+    branches: [ dev ]
+
+jobs:
+  deploy_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: databricks/setup-cli@main
+
+      - name: Deploy to Dev
+        run: databricks bundle deploy --target dev
+        env:
+
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST_DEV }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN_DEV }}
+
+
+      - name: Run Dev Smoke Test
+        run: databricks bundle run --target dev --job smoke_test
+        env:
+
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST_DEV }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN_DEV }}

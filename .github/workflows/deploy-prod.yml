@@ -1,0 +1,24 @@
+name: CD – Deploy to Prod
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy_prod:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Databricks CLI
+        uses: databricks/setup-cli@main
+
+      - name: Deploy Bundle to Prod
+        run: databricks bundle deploy --target prod
+        working-directory: test20
+        env:
+
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST_PROD }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN_PROD }}
