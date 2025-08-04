@@ -1,0 +1,5 @@
+artifacts:
+  test20:
+    type: whl
+    build: uv build
+    path: ..

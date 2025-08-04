@@ -1,0 +1,8 @@
+resources:
+  pipelines:
+    test20_pipeline:
+      name: test20_pipeline
+      target: test20_${bundle.environment}
+      libraries:
+        - notebook:
+            path: ../../src/dlt_pipeline.ipynb

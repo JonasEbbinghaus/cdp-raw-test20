@@ -1,0 +1,19 @@
+bundle:
+  name: test20
+
+include:
+  - artifacts/*.yml
+  - resources/jobs/*.yml
+  - resources/pipelines/*.yml
+  - targets/*.yml
+  - variables/*.yml
+
+targets:
+  dev:
+    workspace: https://adb-2788077839993389.9.azuredatabricks.net
+    catalog: cdp-dev-raw-test20-test-jonas
+    external_location: abfss://loc-dev-raw-test20-test-jonas@stcdphubcommonenv.dfs.core.windows.net/
+  prod:
+    workspace: https://adb-2788077839993389.9.azuredatabricks.net
+    catalog: cdp-prod-raw-test20-test-jonas
+    external_location: abfss://loc-prod-raw-test20-test-jonas@stcdphubcommonenv.dfs.core.windows.net/
